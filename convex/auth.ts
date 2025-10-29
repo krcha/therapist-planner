@@ -1,5 +1,3 @@
-import { clerkAuth } from "convex-clerk";
+import { clerk } from "@convex-dev/auth/clerk";
 
-export const authConfig = {
-  getUserIdentity: clerkAuth(),
-};
+export default clerk;
