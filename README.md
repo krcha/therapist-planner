@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Therapist Planner
 
-## Getting Started
+A **privacy-first practice management app** for psychotherapists. Securely manage client records, encrypted session notes, and appointments with modern tools and a friendly UI.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 🛡️ **Fully Encrypted Session Notes**: Client session summaries are encrypted in the browser. Only you hold the passphrase.
+- 👩‍⚕️ **Client & Session Management**: Add clients, track history, store sensitive information securely.
+- 🔒 **Authentication**: Secure user authentication and multi-device access with Clerk.
+- 💳 **Subscription Management**: Self-serve billing for premium features.
+- 🎨 **Modern UI**: Built with Next.js, React, and shadcn/ui (Radix + Tailwind).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Quick Start
 
-## Learn More
+1. **Install dependencies:**
+   ```bash
+   npm install
+   # or
+   yarn
+   # or
+   pnpm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Open** [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Security & Encryption
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Local Encryption:**
+  - Client session notes are AES-GCM encrypted *before* leaving the browser.
+  - Key is derived from your local passphrase (PBKDF2, 100k iterations).
+  - Passphrase never leaves your device—lose it, and your notes are unrecoverable.
+- **Convex Database:**
+  - Only encrypted blobs are stored—no plaintext sensitive data on the backend.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Tech Stack
+- **Framework**: Next.js 16, React 19
+- **Database**: [Convex](https://convex.dev/)
+- **Auth/Billing**: [Clerk.dev](https://clerk.dev/)
+- **UI**: Radix UI, shadcn/ui, Tailwind CSS
+- **Validation**: Zod, React Hook Form
+
+---
+
+## Dev Scripts
+- `npm run dev` — Start dev server
+- `npm run build` — Production build (uses custom Vercel script)
+- `npm run lint` — Lint code
+
+---
+
+## License
+MIT. For private/professional adaptation only.
