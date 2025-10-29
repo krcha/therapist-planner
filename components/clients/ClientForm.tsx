@@ -10,8 +10,10 @@ import { Textarea } from "@/components/ui/textarea";
 
 export default function ClientForm() {
   const create = useMutation(api.functions.clients.create);
-  const encrypt = useEncrypt(); // ✅ this is our async encrypt function
+  const encrypt = useEncrypt();
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [notes, setNotes] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -20,13 +22,19 @@ export default function ClientForm() {
     setLoading(true);
 
     try {
-      // optional: derive a simple passphrase for encryption (could be per-user or static env)
       const passphrase = process.env.NEXT_PUBLIC_ENCRYPTION_KEY || "tp";
-      const blob = await encrypt(JSON.stringify({ name, notes }), passphrase);
+      const notesEnc = await encrypt(notes, passphrase);
 
-      await create({ blob });
+      await create({
+        name,
+        email,
+        phone,
+        notesEnc, // ✅ match Convex schema
+      });
 
       setName("");
+      setEmail("");
+      setPhone("");
       setNotes("");
     } catch (err) {
       console.error("Error creating client:", err);
@@ -42,6 +50,18 @@ export default function ClientForm() {
         value={name}
         onChange={(e) => setName(e.target.value)}
         required
+      />
+      <Input
+        type="email"
+        placeholder="Email (optional)"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <Input
+        type="tel"
+        placeholder="Phone (optional)"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
       />
       <Textarea
         placeholder="Notes (encrypted)"
