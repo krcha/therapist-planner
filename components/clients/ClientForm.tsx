@@ -9,7 +9,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 export default function ClientForm() {
-  const create = useMutation(api.functions.clients.create);
+  // ✅ FIXED: correct Convex API path
+  const create = useMutation(api.clients.create);
+
   const encrypt = useEncrypt();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -29,7 +31,7 @@ export default function ClientForm() {
         name,
         email,
         phone,
-        notesEnc, // ✅ match Convex schema
+        notesEnc, // ✅ matches Convex schema
       });
 
       setName("");
