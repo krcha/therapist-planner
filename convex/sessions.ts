@@ -6,12 +6,16 @@ export const listByClient = query({
   handler: async (ctx, { clientId }) => {
     const user = await ctx.auth.getUserIdentity();
     if (!user) return [];
+
     // ensure the client belongs to the user
     const client = await ctx.db.get(clientId);
     if (!client || client.ownerId !== user.subject) return [];
+
+    // ✅ Correct usage for Convex v1.28+
     return await ctx.db
       .query("sessions")
-      .withIndex("by_client", q => q.eq("clientId", clientId))
+      .withIndex("by_client")
+      .filter(q => q.eq(q.field("clientId"), clientId))
       .collect();
   },
 });
@@ -25,6 +29,7 @@ export const create = mutation({
   handler: async (ctx, args) => {
     const user = await ctx.auth.getUserIdentity();
     if (!user) throw new Error("Unauthorized");
+
     const client = await ctx.db.get(args.clientId);
     if (!client || client.ownerId !== user.subject) throw new Error("Not found");
 
@@ -37,5 +42,3 @@ export const create = mutation({
     });
   },
 });
-
-
