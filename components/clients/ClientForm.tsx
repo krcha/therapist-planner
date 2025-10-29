@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 export default function ClientForm() {
   const create = useMutation(api.functions.clients.create);
-  const { enc, keyReady } = useEncrypt();
+  const encrypt = useEncrypt();
   const [name, setName] = useState("");
   const [notes, setNotes] = useState("");
 
