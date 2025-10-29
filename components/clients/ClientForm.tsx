@@ -8,37 +8,40 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
-export default function ClientForm() {
-  // ✅ FIXED: correct Convex API path
-  const create = useMutation(api.clients.create);
+interface ClientFormProps {
+  onSuccess?: () => void;
+}
 
+export default function ClientForm({ onSuccess }: ClientFormProps) {
+  const create = useMutation(api.clients.create);
   const encrypt = useEncrypt();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [notes, setNotes] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-
+    setError("");
     try {
       const passphrase = process.env.NEXT_PUBLIC_ENCRYPTION_KEY || "tp";
       const notesEnc = await encrypt(notes, passphrase);
-
       await create({
         name,
         email,
         phone,
-        notesEnc, // ✅ matches Convex schema
+        notesEnc,
       });
-
       setName("");
       setEmail("");
       setPhone("");
       setNotes("");
-    } catch (err) {
+      if (onSuccess) onSuccess();
+    } catch (err: any) {
+      setError(err?.message || "Error creating client");
       console.error("Error creating client:", err);
     } finally {
       setLoading(false);
@@ -70,6 +73,9 @@ export default function ClientForm() {
         value={notes}
         onChange={(e) => setNotes(e.target.value)}
       />
+      {error && (
+        <div style={{ color: 'red', marginBottom: 8 }}>{error}</div>
+      )}
       <Button type="submit" disabled={loading}>
         {loading ? "Saving..." : "Save Client"}
       </Button>
