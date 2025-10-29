@@ -35,7 +35,8 @@ export default function NewSessionPage() {
 
     const salt = process.env.NEXT_PUBLIC_ENCRYPTION_SALT || "tp";
     const key = await deriveKey(passphrase, salt);
-    const summaryEnc = await encryptString(summary, key);
+    const summaryEnc = await encryptString(key, summary);
+
 
     // HTML datetime-local doesn’t include seconds; convert to full ISO
     const iso = new Date(dateISO).toISOString();
