@@ -19,6 +19,6 @@ export default defineSchema({
     createdAt: v.number(),
   })
     .index("by_owner", ["ownerId"])
-    // 👇 add this new index for Convex queries that filter by clientId
+    // 👇 this line is the key
     .index("by_client", ["clientId"]),
 });
