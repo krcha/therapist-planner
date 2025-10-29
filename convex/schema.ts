@@ -17,6 +17,8 @@ export default defineSchema({
     dateISO: v.string(),
     summaryEnc: v.string(),
     createdAt: v.number(),
-  }).index("by_owner", ["ownerId"]),
+  })
+    .index("by_owner", ["ownerId"])
+    // 👇 Add this new line
+    .index("by_client", ["clientId"]),
 });
-
