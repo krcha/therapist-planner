@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "convex:generate": "npx convex codegen",
-    "build": "npm run convex:generate && next build",
+    "build": "./vercel-build.sh",
     "start": "next start",
     "lint": "eslint"
   },
