@@ -9,7 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.34.0",
+    "@clerk/nextjs": "^6.34.1",
     "@clerk/themes": "^2.4.29",
     "@convex-dev/auth": "^0.0.90",
     "@hookform/resolvers": "^5.2.2",
