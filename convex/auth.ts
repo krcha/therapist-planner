@@ -1,6 +1,7 @@
 // convex/auth.ts
-import { convexAuth, clerkProvider } from "@convex-dev/auth";
+import { convexAuth } from "@convex-dev/auth/server";
+import { ConvexCredentials } from "@convex-dev/auth/providers/ConvexCredentials";
 
-export const auth = convexAuth({
-  providers: [clerkProvider()],
+export const { auth, signIn, signOut, store } = convexAuth({
+  providers: [ConvexCredentials],
 });

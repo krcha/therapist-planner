@@ -8,6 +8,7 @@
  * @module
  */
 
+import type * as auth from "../auth.js";
 import type * as clients from "../clients.js";
 import type * as functions_clients from "../functions/clients.js";
 import type * as sessions from "../sessions.js";
@@ -27,6 +28,7 @@ import type {
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  auth: typeof auth;
   clients: typeof clients;
   "functions/clients": typeof functions_clients;
   sessions: typeof sessions;

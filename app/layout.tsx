@@ -1,22 +1,23 @@
 import "../styles/globals.css";
 import { Inter } from "next/font/google";
 import { ClerkProvider, SignedIn, SignedOut, SignInButton, SignUpButton, UserButton, useAuth } from "@clerk/nextjs";
-import { ConvexProviderWithClerk } from "convex/react-clerk";
+import dynamic from "next/dynamic";
 import { convex } from "@/lib/convexClient";
-import { Providers } from "./providers/providers";
+import { Providers } from "./providers/providers.js";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const ConvexProviderWithClerk = dynamic(
+  () => import("convex/react-clerk").then((mod) => mod.ConvexProviderWithClerk),
+  { ssr: false }
+);
 
 export const metadata = {
   title: "Therapist Planner",
   description: "Privacy-first planner for psychotherapists",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
       <html lang="en">
