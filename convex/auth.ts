@@ -1,11 +1,8 @@
-import { auth } from "@convex-dev/auth";
+// convex/auth.ts
+import { convexAuth } from "@convex-dev/auth/server";
 import { clerk } from "@convex-dev/auth/providers/clerk";
 
-export default auth({
-  providers: [
-    clerk({
-      // 👇 your live Clerk instance
-      instanceDomain: "wooden-rabbit-395.convex.cloud",
-    }),
-  ],
+// create the auth export used by Convex
+export const auth = convexAuth({
+  providers: [clerk()],
 });
