@@ -1,10 +1,16 @@
 import { SignUp } from "@clerk/nextjs";
 
-export default function Page() {
+export default function SignUpPage() {
   return (
-    <div className="flex justify-center mt-20">
-      <SignUp />
+    <div className="flex min-h-[calc(100vh-8rem)] items-center justify-center">
+      <SignUp
+        appearance={{
+          elements: {
+            rootBox: "mx-auto",
+            card: "shadow-none",
+          },
+        }}
+      />
     </div>
   );
 }
-
