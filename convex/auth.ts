@@ -5,7 +5,7 @@ export default auth({
   providers: [
     clerk({
       // 👇 your live Clerk instance
-      instanceDomain: "modest-kitten-20.clerk.accounts.dev",
+      instanceDomain: "wooden-rabbit-395.convex.cloud",
     }),
   ],
 });
