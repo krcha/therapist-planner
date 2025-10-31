@@ -2,7 +2,7 @@
 export default {
   providers: [
     {
-      domain: "https://clerk.ineedtofeedmyrabbit.com",
+      domain: "https://modest-kitten-20.clerk.accounts.dev",
       applicationID: "convex",
     },
   ],
